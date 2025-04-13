@@ -4,11 +4,12 @@ import { getProductByHandle } from "@/lib/shopify";
 import Image from "next/image";
 import { GoShare } from "react-icons/go";
 
-export default async function ProductPage({
-  params,
-}: {
-  params: { handle: string };
-}) {
+type Props = {
+  params: {
+    handle: string;
+  };
+};
+export default async function ProductPage({ params }: { params: any }) {
   const product = await getProductByHandle(params.handle);
 
   if (!product) return <div>Product not found</div>;
