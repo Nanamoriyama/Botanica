@@ -5,8 +5,11 @@ export default function Footer() {
     <>
       <div className="flex flex-col items-center justify-center md:flex-row md:justify-between md:px-10 m-6">
         <div className="mb-4">
-          <div className="mb-3 font-light">
-            <label htmlFor="country" className="text-sm text-gray-600">
+          <div className="md:mb-3 font-light">
+            <label
+              htmlFor="country"
+              className="text-xs md:text-sm text-gray-600"
+            >
               Country/Region
             </label>
           </div>

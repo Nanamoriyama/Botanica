@@ -77,15 +77,12 @@ export async function getProductByHandle(handle: string) {
   const product = json.data.productByHandle;
   return product
     ? {
+        id: product.id,
         title: product.title,
         description: product.description,
         images: product.images.edges.map((e: any) => e.node),
-        price: new Intl.NumberFormat("nl-NL", {
-          style: "currency",
-          currency: product.priceRange.minVariantPrice.currencyCode,
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        }).format(product.priceRange.minVariantPrice.amount),
+        price: parseFloat(product.priceRange.minVariantPrice.amount), // ← number 型で保持
+        currencyCode: product.priceRange.minVariantPrice.currencyCode,
       }
     : null;
 }

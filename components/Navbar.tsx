@@ -16,15 +16,19 @@ export default function Navbar() {
         <button onClick={() => setIsOpen(true)}>
           <RxHamburgerMenu size={24} />
         </button>
-        <div className="flex justify-center flex-col items-center font-thin text-lg">
-          <div className="tracking-widest">B O T A N I C A </div>
-          <div className="text-base">Botanic Store</div>
-        </div>
+        <Link href="/">
+          <div className="flex justify-center flex-col items-center font-thin text-lg">
+            <div className="tracking-widest">B O T A N I C A </div>
+            <div className="text-base">Botanic Store</div>
+          </div>
+        </Link>
         <div className="flex gap-4">
           <Link href="login">
             <PiPersonThin size={28} className="text-stone-700" />
           </Link>
-          <PiBagSimpleThin size={28} className="text-stone-700" />
+          <Link href="cart">
+            <PiBagSimpleThin size={28} className="text-stone-700" />
+          </Link>
         </div>
       </div>
 

@@ -1,4 +1,6 @@
 🪴 Botanica - Plant E-commerce Website
+https://botanica-seven.vercel.app/
+
 A custom-built plant store built with Next.js to practice GraphQL and Shopify Storefront API integration.
 
 🔍 Purpose & Motivation

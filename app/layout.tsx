@@ -3,6 +3,8 @@ import { ReactNode } from "react";
 import ApolloWrapper from "@/components/ApolloWrapper";
 import Subscribe from "@/components/Subscribe";
 import Footer from "@/components/Footer";
+import { CartProvider } from "@/context/CartContext";
+import Navbar from "@/components/Navbar";
 
 export const metadata = {
   title: "Photo Blog",
@@ -13,13 +15,16 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <ApolloWrapper>{children}</ApolloWrapper>
-        <div>
-          <hr />
-          <Subscribe />
-          <hr />
-          <Footer />
-        </div>
+        <CartProvider>
+          <Navbar />
+          <ApolloWrapper>{children}</ApolloWrapper>
+          <div>
+            <hr />
+            <Subscribe />
+            <hr />
+            <Footer />
+          </div>
+        </CartProvider>
       </body>
     </html>
   );

@@ -1,27 +1,32 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useKeenSlider } from "keen-slider/react";
+import Image from "next/image";
 import "keen-slider/keen-slider.min.css";
 
-const mobileImages = [
-  "/hero/mobile/slide1_sp.jpg",
-  "/hero/mobile/slide3_sp.jpg",
-  "/hero/mobile/slide4_sp.jpg",
-  "/hero/mobile/slide5_sp.jpg",
-];
-
-const desktopImages = [
-  "/hero/desktop/slide1.jpg",
-  "/hero/desktop/slide3.jpg",
-  "/hero/desktop/slide4.jpg",
-  "/hero/desktop/slide5.jpg",
+// 画像パスをモバイル & デスクトップで分けて管理
+const imageSet = [
+  {
+    mobile: "/hero/mobile/slide1_sp.jpg",
+    desktop: "/hero/desktop/slide1.jpg",
+  },
+  {
+    mobile: "/hero/mobile/slide3_sp.jpg",
+    desktop: "/hero/desktop/slide3.jpg",
+  },
+  {
+    mobile: "/hero/mobile/slide4_sp.jpg",
+    desktop: "/hero/desktop/slide4.jpg",
+  },
+  {
+    mobile: "/hero/mobile/slide5_sp.jpg",
+    desktop: "/hero/desktop/slide5.jpg",
+  },
 ];
 
 export default function HeroSlider() {
-  const [isMobile, setIsMobile] = useState(false);
-
-  // useKeenSlider から「refをセットする関数」と「sliderインスタンス」を取り出す
+  // Keen Slider の初期化
   const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
     loop: true,
     slides: {
@@ -29,32 +34,34 @@ export default function HeroSlider() {
     },
   });
 
-  useEffect(() => {
-    const checkScreen = () => setIsMobile(window.innerWidth < 768);
-    checkScreen();
-    window.addEventListener("resize", checkScreen);
-    return () => window.removeEventListener("resize", checkScreen);
-  }, []);
-
+  // スライダーを3秒ごとに自動で進める
   useEffect(() => {
     const interval = setInterval(() => {
-      slider.current?.next(); // スライダーを進める
+      slider.current?.next();
     }, 3000);
 
     return () => clearInterval(interval);
   }, [slider]);
 
-  const imagesToShow = isMobile ? mobileImages : desktopImages;
-
   return (
     <div ref={sliderRef} className="keen-slider">
-      {imagesToShow.map((src, index) => (
+      {imageSet.map((img, index) => (
         <div className="keen-slider__slide" key={index}>
-          <img
-            src={src}
-            alt={`Slide ${index + 1}`}
-            className="w-full h-auto object-cover"
-          />
+          <div className="relative w-full h-[60vh] sm:h-[90vh]">
+            <picture>
+              {/* モバイル画像 */}
+              <source media="(max-width: 767px)" srcSet={img.mobile} />
+              {/* デスクトップ画像 */}
+              <Image
+                src={img.desktop}
+                alt={`Slide ${index + 1}`}
+                fill
+                className="object-cover"
+                sizes="(max-width: 767px) 100vw, 100vw"
+                priority={index === 0}
+              />
+            </picture>
+          </div>
         </div>
       ))}
     </div>
