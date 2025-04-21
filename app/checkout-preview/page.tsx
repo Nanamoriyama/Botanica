@@ -66,14 +66,14 @@ export default function CheckoutPreviewPage() {
           <div className="mt-6 text-right text-lg font-semibold">
             Total: €{totalPrice.toFixed(2)}
           </div>
-
+          <div className="flex font-extralight text-2xl mt-8">Delivery</div>
           <form onSubmit={handleSubmit} className="mt-10 space-y-4 max-w-md">
             <input
               type="email"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full border border-gray-300 px-4 py-2 rounded"
+              className="w-full border border-gray-800 px-4 py-2 rounded"
               required
             />
             <input
@@ -81,7 +81,7 @@ export default function CheckoutPreviewPage() {
               placeholder="First Name"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
-              className="w-full border border-gray-300 px-4 py-2 rounded"
+              className="w-full border border-gray-800 px-4 py-2 rounded"
               required
             />
             <input
@@ -89,7 +89,7 @@ export default function CheckoutPreviewPage() {
               placeholder="Last Name"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
-              className="w-full border border-gray-300 px-4 py-2 rounded"
+              className="w-full border border-gray-800 px-4 py-2 rounded"
               required
             />
             <input
@@ -97,7 +97,7 @@ export default function CheckoutPreviewPage() {
               placeholder="Address"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
-              className="w-full border border-gray-300 px-4 py-2 rounded"
+              className="w-full border border-gray-800 px-4 py-2 rounded"
               required
             />
 

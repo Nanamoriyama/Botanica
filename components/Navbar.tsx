@@ -21,7 +21,7 @@ export default function Navbar() {
         </button>
         <Link href="/">
           <div className="flex justify-center flex-col items-center font-thin text-lg">
-            <div className="tracking-widest">B O T A N I C A </div>
+            <div className="tracking-widest">B O T A N I C A</div>
             <div className="text-base">Botanic Store</div>
           </div>
         </Link>
@@ -55,7 +55,7 @@ export default function Navbar() {
                   <p className="p-4">Home</p>
                 </Link>
                 <Link
-                  href="/shop"
+                  href="/"
                   className="hover:bg-gray-100"
                   onClick={() => setIsOpen(false)}
                 >
