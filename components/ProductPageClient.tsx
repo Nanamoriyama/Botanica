@@ -9,6 +9,7 @@ import CartModal from "./CartModal";
 type Props = {
   product: {
     id: string;
+    variantId: string;
     title: string;
     description: string;
     price: number;
@@ -68,6 +69,7 @@ export default function ProductPageClient({ product }: Props) {
             onClick={() => {
               addToCart({
                 id: product.id,
+                variantId: product.variantId,
                 title: product.title,
                 price: product.price,
                 image: product.images[0]?.url || "",

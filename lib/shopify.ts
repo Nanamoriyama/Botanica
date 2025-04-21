@@ -64,8 +64,14 @@ export async function getProductByHandle(handle: string) {
                 currencyCode
               }
             }
+            variants(first: 1) {
+              edges {
+                node {
+                  id
+                }
+              }
           }
-        }
+        }}
       `,
       variables: {
         handle,
@@ -83,6 +89,44 @@ export async function getProductByHandle(handle: string) {
         images: product.images.edges.map((e: any) => e.node),
         price: parseFloat(product.priceRange.minVariantPrice.amount), // ← number 型で保持
         currencyCode: product.priceRange.minVariantPrice.currencyCode,
+        variantId: product.variants.edges[0]?.node.id ?? "",
       }
     : null;
+}
+// lib/shopify.ts
+export async function createCheckout(variantId: string, quantity: number = 1) {
+  const res = await fetch(`https://${domain}/api/2023-07/graphql.json`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-Shopify-Storefront-Access-Token": storefrontAccessToken,
+    },
+    body: JSON.stringify({
+      query: `
+        mutation checkoutCreate($input: CheckoutCreateInput!) {
+          checkoutCreate(input: $input) {
+            checkout {
+              webUrl
+            }
+            checkoutUserErrors {
+              message
+            }
+          }
+        }
+      `,
+      variables: {
+        input: {
+          lineItems: [
+            {
+              variantId,
+              quantity,
+            },
+          ],
+        },
+      },
+    }),
+  });
+
+  const json = await res.json();
+  return json.data.checkoutCreate.checkout.webUrl;
 }

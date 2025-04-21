@@ -5,14 +5,17 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import Link from "next/link";
 import { PiBagSimpleThin, PiPersonThin } from "react-icons/pi";
 import { IoPersonOutline } from "react-icons/io5";
+import { useCart } from "@/context/CartContext";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { cart, isReady } = useCart();
 
+  if (!isReady) return null;
   return (
     <>
       {/* Navbar */}
-      <div className="bg-white/70 backdrop-blur-sm fixed top-0 left-0 w-full flex justify-between items-center px-6 py-4 z-20">
+      <div className="bg-white/10 backdrop-blur-sm fixed top-0 left-0 w-full flex justify-between items-center px-6 py-4 z-20">
         <button onClick={() => setIsOpen(true)}>
           <RxHamburgerMenu size={24} />
         </button>
@@ -23,10 +26,10 @@ export default function Navbar() {
           </div>
         </Link>
         <div className="flex gap-4">
-          <Link href="login">
+          <Link href="/login">
             <PiPersonThin size={28} className="text-stone-700" />
           </Link>
-          <Link href="cart">
+          <Link href="/cart">
             <PiBagSimpleThin size={28} className="text-stone-700" />
           </Link>
         </div>
