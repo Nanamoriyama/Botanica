@@ -55,7 +55,7 @@ export default function Navbar() {
                   <p className="p-4">Home</p>
                 </Link>
                 <Link
-                  href="/"
+                  href="/plants"
                   className="hover:bg-gray-100"
                   onClick={() => setIsOpen(false)}
                 >
